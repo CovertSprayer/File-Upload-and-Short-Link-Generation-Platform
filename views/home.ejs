@@ -1,0 +1,21 @@
+<% layout('layouts/boilerplate') -%>
+
+    <form class="input-group my-4 mx-auto" style="width: 30vw;" action="/upload" method="POST" encType="multipart/form-data">
+            <input  accept = "image/*" name="file" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Upload</button>
+    </form>
+
+    <p id="errorText" style="color: rgb(255, 60, 0); width: 400px; margin: 0 auto; text-align: center;">
+        Only accepts images (size limit: 5mb)
+    </p>
+
+    <div class="m-4 d-flex flex-wrap gap-3">
+        <% for( let file of files ) { %>
+            <li>
+                <span>http://localhost:4444/<%= file.shortLink %></span>
+                <!-- <a href="<%= file.originalLink %>" target="_blank">http://localhost:4444/<%= file.shortLink %></a> -->
+                <a href="<%= file.originalLink %>" target="_blank">download</a>
+            </li>
+        <% } %>
+    </div>
+
