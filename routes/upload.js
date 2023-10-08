@@ -14,6 +14,7 @@ router.post('/upload', invalidHandler, async (req, res) => {
                 shortLink: nanoid()
             })
         });
+        req.flash('success', 'File added successfully!');
         res.redirect('/');
     }
 
@@ -22,15 +23,15 @@ router.post('/upload', invalidHandler, async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res)=>{
+router.get('/:id', async (req, res) => {
     try {
-        const {id} = req.params;
-        const file = await File.findOne({shortLink:id});
-        if(!file){
+        const { id } = req.params;
+        const file = await File.findOne({ shortLink: id });
+        if (!file) {
             return res.render('error', { err: 'Sorry, file does not exist!' });
         }
         res.redirect(file.originalLink);
-    } 
+    }
     catch (e) {
         res.render('error', { err: `Sorry, Something went Wrong!, ${e.message}` });
     }
